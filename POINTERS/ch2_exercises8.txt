@@ -1,0 +1,106 @@
+//n=10; 8 3 5 2 20 11 30 9 18 4
+#include <iostream.h>
+#include<math.h>
+struct node
+		{
+			int info;
+			struct node *left,*right;
+		};
+typedef node *tree;
+int  chennutvaoBST(tree &root,int k);
+void taoBST(tree &root);
+int tong(tree root);
+int giatrilonnhat(tree root);
+int demnut(tree root);
+int demnutla(tree root);
+int demnut1caycon(tree root);
+int demnut2caycon(tree root);
+int main()
+{
+	tree root;
+	int x;
+	taoBST(root);
+	return 0;
+}
+//BT2-8a
+int chennutvaoBST(tree &root,int k)
+{
+	if (root!=NULL)
+		{	if (root->info==k) return 0;
+			if (root->info>k) 	return chennutvaoBST(root->left,k);
+			else 	return chennutvaoBST(root->right,k);
+		}
+	else
+	   {
+			root=new node;
+			if (root==NULL) return -1;
+			root->info=k;
+			root->left=root->right=NULL;
+			return 1;
+		}
+}
+void taoBST(tree &root)
+{
+	int k,n;
+	cout<<"\nIn put n=";cin>>n;
+	root=NULL;
+	for (int i=1;i<=n;i++)
+		{
+			cin>>k;
+			chennutvaoBST(root,k);
+		}
+}
+
+//BT2-8b
+int tong(tree root)
+{
+if (root==NULL) return 0;
+return root->info+tong(root->left)+tong(root->right);
+}
+//BT2-8c
+int giatrilonnhat(tree root)
+{
+	while (root->right!=NULL)
+		root=root->right;
+	return root->info;
+}
+//BT2-8d
+int demnut(tree root)
+{
+	if (root==NULL)	return 0;
+	return demnut(root->left)+demnut(root->right)+1;
+}
+
+//BT2-8e
+int demnutla(tree root)
+{	
+	if (root==NULL) return 0;
+	if ((root->left==NULL) && (root->right==NULL))	
+	return 1;
+	else return demnutla(root->left)+demnutla(root->right);
+}
+
+//BT2-8f
+int demnut1caycon(tree root)
+{
+	if (root==NULL) return 0;
+	else
+	{
+		if ((root->left!=NULL && root->right==NULL) ||
+			(root->left==NULL && root->right!=NULL))
+		return 1+demnut1caycon(root->left)+demnut1caycon(root->right);
+		return demnut1caycon(root->left)+demnut1caycon(root->right);
+	}
+}
+
+//BT2-8g
+int demnut2caycon(tree root)
+{
+	if (root==NULL) return 0;
+	else
+	{
+		if (root->left!=NULL && root->right!=NULL)
+		return 1+demnut2caycon(root->left)+demnut2caycon(root->right);
+		return demnut2caycon(root->left)+demnut2caycon(root->right);
+	}
+}

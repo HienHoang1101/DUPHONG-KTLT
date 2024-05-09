@@ -1,0 +1,15 @@
+#include<iostream.h>
+int f(int n);
+int main ()
+{
+	int n;
+	cout<<"Nhap n= ";cin>>n;
+	cout<<"Ket qua: "<<f(n);
+	cout<<endl;
+	return 0;
+}
+int f(int n)
+{
+	if(n==1||n==2) return 1;
+	return f(n-1)+f(n-2);
+}

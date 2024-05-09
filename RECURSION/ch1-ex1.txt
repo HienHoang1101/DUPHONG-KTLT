@@ -1,0 +1,15 @@
+#include<iostream.h>
+long giaithua(int n);
+int main()
+{
+	int n;
+	cout<<"Nhap n= ";cin>>n;
+	cout<<"Ket qua: "<<giaithua(n);
+	cout<<endl;
+	return 0;
+}
+long giaithua (int n)
+{
+	if(n==0||n==1) return 1;
+	return n*giaithua(n-1);
+}

@@ -1,0 +1,110 @@
+#include <iostream.h>
+void count_upper_lower(char s[]);
+void ascii_code(char s[]);
+void char_conver(char s[]);
+void word_count(char s[]);
+void char_count(char s[]);
+int word_lenmax(char s[]);
+int main()
+{
+	char s[10000];
+	gets(s);
+//	count_upper_lower(s);
+//	ascii_code(s);
+//	char_conver(s);
+//	word_count(s);
+//	word_count(s);
+//	cout<<word_lenmax(s);
+	return 0;
+}
+//Ex3-1a
+void count_upper_lower(char s[])					
+{
+	int d1=0,d2=0;
+	for (int i=0;i<strlen(s);i++)
+	{
+	if (isupper(s[i])) d1++;
+	if (islower(s[i])) d2++;
+	}
+	cout<<d1<<" "<<d2<<endl;
+}
+//Ex3-1b
+void ascii_code(char s[])					
+{
+	for (int i=0;i<strlen(s);i++)
+	cout<<toascii(s[i])<<" ";
+}
+//Ex3-1c
+void char_conver(char s[])
+{ 	strlwr(s);
+	for (int i=0;i<strlen(s);i++)
+	if (isspace(s[i]))
+		s[i+1]=toupper(s[i+1]);
+	s[0]=toupper(s[0]);		
+	cout<<s;
+}
+//Ex3-1d
+void word_count(char s[])
+{
+	int d=1; 
+	for (int i=0;i<strlen(s);i++)
+	if (s[i]==' ') d++;
+	cout<<d;
+}
+
+//Ex3-1e
+void char_count(char s[])
+{
+	int d=0; 
+	s[strlen(s)]=' ';
+	for (int i=0;i<strlen(s);i++)
+	{
+	if (s[i]!=' ') d++; 
+	else
+		{
+		cout<<d<<" ";
+		d=0;	
+		}
+	}
+	//cout<<d<<" "; // su dung lenh nay neu khong su dung s[strlen(s)]=' ';
+}
+//Ex3-1f
+int word_lenmax(char s[])
+{
+	char *token;
+   token = strtok(s," ");
+   int max=0;
+   while(token !=NULL) 
+   {
+      if(strlen(token)>max) max=strlen(token);
+      token=strtok(NULL," ");
+   }
+  return max;
+}
+
+//Ex3-1g
+void sapxepkytu(char s[])
+ {
+    for (int i=0;i<strlen(s)-1;i++)
+ 	for (int j=i+1;j<strlen(s);j++)
+ 	if (s[i]>s[j]) {char ch=s[i];	s[i]=s[j];s[j]=ch;}
+ 	cout<<s;
+ }
+
+
+//Ex3-1h
+void tansocackytu( char *s)
+{	
+int l=strlen(s);
+int d[255];
+for (int i=0;i<l;i++)
+d[s[i]]=0;
+for (i=0;i<l;i++)
+d[s[i]]++;
+for (i=0;i<l;i++)
+if (d[s[i]]!=0)
+{
+cout<<s[i]<<" xuat hien "<<d[s[i]]<<" lan" <<endl;
+		d[s[i]]=0;
+}
+}

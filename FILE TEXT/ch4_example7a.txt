@@ -1,0 +1,21 @@
+#include <iostream.h>
+struct phanso
+{	
+	int tuso;
+	int mauso;
+};
+phanso ps;
+int main()
+{	
+	FILE *f;
+	f=fopen("phanso.txt","wb");
+	int n;
+	cin>>n;
+	putw(n,f);
+	for (int i=1;i<=n;i++)
+	{	
+		cin>>ps.tuso>>ps.mauso;
+		fwrite(&ps,sizeof(ps),1,f);
+	}
+	fclose(f);
+}

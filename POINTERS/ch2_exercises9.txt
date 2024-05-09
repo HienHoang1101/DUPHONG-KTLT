@@ -1,0 +1,114 @@
+//n=10; 8 3 5 2 20 11 30 9 18 4
+#include <iostream.h>
+#include<math.h>
+struct node
+		{
+			int info;
+			struct node *left,*right;
+		};
+typedef node *tree;
+int  chennutvaoBST(tree &root,int k);
+void taoBST(tree &root);
+int demnutnguyento(tree root);
+int timkiem01(tree root,int x);
+void duongditugoc(tree root, int x);
+int muccuanut(tree root, int x);
+int chieucao(tree root);
+int main()
+{
+	tree root;
+	int x;
+	taoBST(root);
+	return 0;
+}
+int chennutvaoBST(tree &root,int k)
+{
+	if (root!=NULL)
+		{	if (root->info==k) return 0;
+			if (root->info>k) 	return chennutvaoBST(root->left,k);
+			else 	return chennutvaoBST(root->right,k);
+		}
+	else
+	   {
+			root=new node;
+			if (root==NULL) return -1;
+			root->info=k;
+			root->left=root->right=NULL;
+			return 1;
+		}
+}
+void taoBST(tree &root)
+{
+	int k,n;
+	cout<<"\nIn put n=";cin>>n;
+	root=NULL;
+	for (int i=1;i<=n;i++)
+		{
+			cin>>k;
+			chennutvaoBST(root,k);
+		}
+}
+//BT2-9a
+int nguyento(int n)
+{
+	if (n<2) return 0;
+	int k=sqrt(n);
+	for (int i=2;i<=k;i++)
+		if (n%i==0) return 0;
+	return 1;
+}
+int demnutnguyento(tree root)
+{
+if (root==NULL) return 0;
+return nguyento(root->info)+demnutnguyento(root->left)
+       +demnutnguyento(root->right);
+}
+//BT2-9b
+int timkiem01(tree root,int x)
+{
+	if (root==NULL)	return 0;
+	else
+		if (root->info==x)	return 1;
+		if (x>root->info)	return timkiem01(root->right,x);
+		else            return timkiem01(root->left,x);
+}
+
+//BT2-9c
+void duongditugoc(tree root, int x)
+{
+	cout<<"Nhap x = ";cin>>x;
+if (timkiem01(root,x))
+{
+	while (root->info!=x)
+	{
+	cout<<root->info<<" ->";
+	if (root->info>x)	root=root->left;
+	else
+	if (root->info<x)	root=root->right;
+	}
+	cout<<root->info;
+}
+else
+	cout<<"Khong co duong di tu goc den "<<x;
+}
+//BT2-9d
+int muccuanut(tree root, int x)
+{
+	if (root!=NULL)
+	{
+	if (root->info==x) return 0;
+	if (root->info>x)	return 1+muccuanut(root->left,x);
+	if (root->info<x)	return 1+muccuanut(root->right,x);
+	}
+	return 0;
+}
+//BT2-9e
+int chieucao(tree root)
+{	if (root==NULL) return 0;
+	else
+		{
+		long hl=chieucao(root->left);
+		long hr=chieucao(root->right);
+		return 1+((hl<hr) ? hr:hl);
+		}
+}

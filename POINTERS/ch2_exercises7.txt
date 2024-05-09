@@ -1,0 +1,77 @@
+//n=8; 11 5 7 4 3 6 2 7
+#include<iostream.h>
+#include<math.h>
+struct 	node 
+	{	
+	int	info;
+	node *next;
+	};
+struct	list
+	{
+		node	*head,*tail;
+	} ;
+void list_insert_tail(list &l);
+void list_process(list l);
+void split_list(list l, list &l1, list &l2);
+list l;
+list l1,l2;
+int main()
+{
+	list_insert_tail(l);	
+	list_process(l);
+	split_list(l,l1,l2);
+	list_process(l1);
+	list_process(l2);		
+	return 0;
+}
+node*	getnode (int x)
+{	
+	node* p=new node;
+	if (p==NULL) 
+		exit(1);
+	p->info=x;
+	p->next=NULL;
+	return p;
+}
+
+void list_process(list l)
+{	
+	node*p=l.head;
+	while (p!=NULL)
+	{	
+		cout<<p->info<<"  ";
+		p=p->next;
+	}
+	cout<<endl;
+}
+void	insert_tail(list &l,node *p)
+{
+	if (l.head==NULL)
+		  {	l.head=p;
+			l.tail=p;
+		  }
+	else
+		  {
+			l.tail->next=p;
+			l.tail=p;
+		  }
+}
+void list_insert_tail(list &l)
+{
+	int x,n;
+	cout<<"Nhap vao so n = ";cin>>n;
+	for (int i=1;i<=n;i++)
+	{
+		cin>>x;
+		insert_tail(l,getnode(x));
+	}
+}
+//split a list into even and odd lists
+void 	split_list(list l, list &l1, list &l2)
+{
+	for (node *p=l.head;p!=NULL;p=p->next)
+	if (p->info%2!=0)
+		insert_tail(l1,getnode(p->info));
+	else
+		insert_tail(l2,getnode(p->info));
+}

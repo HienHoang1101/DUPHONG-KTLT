@@ -1,0 +1,107 @@
+#include<iostream.h>
+#include<math.h>
+#define maxm 200
+#define maxn 500
+void docfile(int a[maxm][maxn], int &m, int &n);
+void ghifile(int a[maxm][maxn], int m, int n);
+int caua(int a[maxm][maxn], int m, int n);
+int caub(int a[maxm][maxn], int m, int n);
+void cauc(int a[maxm][maxn], int m, int n);
+void caud(int a[maxm][maxn], int m, int n);
+void caue(int a[maxm][maxn], int m, int n);
+FILE *f;
+int main()
+{
+	int a[maxm][maxn],m,n;
+	docfile(a,m,n);
+	ghifile(a,m,n);	
+	return 0;	
+}
+void docfile(int a[maxm][maxn], int &m, int &n)
+{
+	FILE *f;
+	f=fopen("table.inp","rt");
+	fscanf(f,"%d%d",&m,&n);
+	for (int i=0;i<m;i++)
+	for (int j=0;j<n;j++)
+	fscanf(f,"%d",&a[i][j]);
+	fclose(f);	
+}
+void ghifile(int a[maxm][maxn], int m, int n)
+{
+	f=fopen("table.out","wt");
+	fprintf(f,"Cau a:%d\n",caua(a,m,n));
+	fprintf(f,"Cau b:%d\n",caub(a,m,n));
+	fprintf(f,"Cau c:"); 	cauc(a,m,n);
+	fprintf(f,"Cau d:");	caud(a,m,n);
+	fprintf(f,"Cau e:");	caue(a,m,n);
+	fclose(f);
+}
+int caua(int a[maxm][maxn], int m, int n)
+{
+	int s=0;
+	for(int i=0;i<m;i++)
+		for(int j=0;j<n;j++)
+		s=s+a[i][j];
+	return s;	
+}
+int prime(int n)
+{
+	if (n<2) return 0;
+	int k=sqrt(n);
+	for (int i=2;i<=k;i++)
+	if (n%i==0) return 0;
+	return 1;	
+}
+int caub(int a[maxm][maxn], int m, int n)
+{
+	int d=0;
+	for (int i=0;i<m;i++)
+	for (int j=0;j<n;j++)
+	if(prime(a[i][j]))
+	d++;
+	return d;
+}
+void cauc(int a[maxm][maxn], int m, int n)
+{
+	int tongdong;
+	for (int i=0;i<m;i++)
+    {
+        tongdong=0;
+        for (int j=0;j<n;j++)
+            tongdong+=a[i][j];
+        fprintf(f,"%d ",tongdong);
+    }
+	fprintf(f,"\n");
+}
+void caud(int a[maxm][maxn], int m, int n)
+{
+	int tongcot;
+	for (int i=0;i<n;i++)
+    {
+        tongcot=0;
+        for (int j=0;j<m;j++)
+            tongcot+=a[j][i];
+        fprintf(f,"%d ",tongcot);
+    }
+	fprintf(f,"\n");
+}
+void caue(int a[maxm][maxn], int m, int n)
+{
+    int tongchan=0,tongle=0;
+	for (int i=0;i<m;i++)
+	for (int j=0;j<n;j++)
+	if(a[i][j]%2==0)
+       	tongchan++;
+ 	else 
+	 	tongle++;
+    fprintf(f,"%d ",tongchan);
+    fprintf(f,"%d\n",tongle);
+}
+/*
+4 6
+3 7 5 1 9 3
+0 0 7 9 8 7
+6 2 100 11 200 4
+8 3 7 13 17 29
+*/

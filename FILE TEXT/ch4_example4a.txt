@@ -1,0 +1,14 @@
+#include<iostream.h>
+int main()
+{
+	FILE *f=fopen("str.txt","rt");
+	char ch;
+	while (!feof(f))
+	{
+		ch=fgetc(f);
+		putchar(ch);
+	}
+	fclose(f);
+	cout<<endl;
+	return 0;
+}

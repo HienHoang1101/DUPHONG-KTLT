@@ -1,0 +1,114 @@
+//n=10; 8 3 5 2 20 11 30 9 18 4
+#include <iostream.h>
+#include<math.h>
+struct node
+		{
+			int info;
+			struct node *left,*right;
+		};
+typedef node *tree;
+int  chennutvaoBST(tree &root,int k);
+void taoBST(tree &root);
+void LNR(tree root);
+void NLR(tree root);
+void LRN(tree root);
+void RNL(tree root);
+void NRL(tree root);
+void RLN(tree root);
+int main()
+{
+	tree root;
+	int x;
+	taoBST(root);
+	cout<<"\nNLR:"; NLR(root);
+	cout<<"\nLNR:"; LNR(root);
+	cout<<"\nLRN:"; LRN(root);
+	cout<<"\nNRL:"; NRL(root);
+	cout<<"\nRNL:"; RNL(root);
+	cout<<"\nRLN:"; RLN(root);
+	return 0;
+}
+int chennutvaoBST(tree &root,int k)
+{
+	if (root!=NULL)
+		{	if (root->info==k) return 0;
+			if (root->info>k) 	return chennutvaoBST(root->left,k);
+			else 	return chennutvaoBST(root->right,k);
+		}
+	else
+	   {
+			root=new node;
+			if (root==NULL) return -1;
+			root->info=k;
+			root->left=root->right=NULL;
+			return 1;
+		}
+}
+void taoBST(tree &root)
+{
+	int k,n;
+	cout<<"\nIn put n=";cin>>n;
+	root=NULL;
+	for (int i=1;i<=n;i++)
+		{
+			cin>>k;
+			chennutvaoBST(root,k);
+		}
+}
+void LNR(tree root)
+{
+if (root!=NULL)
+	{
+		LNR(root->left);
+		cout<<root->info<<" ";
+		LNR(root->right);
+	}
+}
+ 
+void NLR(tree root)
+{
+if (root!=NULL)
+	{
+		cout<<root->info<<" ";
+		NLR(root->left);
+		NLR(root->right);
+	}
+}
+void LRN(tree root)
+{
+if (root!=NULL)
+	{
+		LRN(root->left);
+		LRN(root->right);
+		cout<<root->info<<" ";
+	}
+}
+//----------------
+void RNL(tree root)
+{
+if (root!=NULL)
+	{
+		RNL(root->right);
+		cout<<root->info<<" ";
+		RNL(root->left);
+	}
+}
+
+void NRL(tree root)
+{
+if (root!=NULL)
+	{
+		cout<<root->info<<" ";
+		NRL(root->right);
+		NRL(root->left);
+	}
+}
+void RLN(tree root)
+{
+if (root!=NULL)
+	{
+		RLN(root->right);
+		RLN(root->left);
+		cout<<root->info<<" ";
+	}
+}

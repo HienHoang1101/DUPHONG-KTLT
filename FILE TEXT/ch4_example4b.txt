@@ -1,0 +1,14 @@
+#include<iostream.h>
+int main()
+{
+	FILE *f=fopen("str1.txt","wt");
+	char ch;
+	do
+	{
+	cin>>ch;
+	if (ch!='0') fputc(ch,f);
+	}
+	while (ch!='0');
+	fclose(f);
+	return 0;
+}

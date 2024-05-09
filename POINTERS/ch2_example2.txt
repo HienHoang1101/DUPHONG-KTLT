@@ -1,0 +1,35 @@
+#include<iostream.h>
+void nhap(int *&a, int &n);
+void xuat(int *a, int n);
+int GTLN(int *a,int n);
+int main()
+{
+	int *a,n; 
+	nhap(a,n);
+	xuat(a,n);
+	cout<<"Result: "<<GTLN(a,n)<<endl;
+	delete a;
+	return 0;	
+}
+void nhap(int *&a, int &n)
+{
+	cout<<"Enter n : ";cin>>n;
+	a=new int [n];
+	for(int i=0;i<n;i++)
+	cin>>*(a+i);
+}
+void xuat(int *a, int n)
+{
+	for(int i=0;i<n;i++)
+	cout<<*(a+i)<<" ";
+	cout<<endl;
+}	
+int GTLN(int *a,int n)
+{
+	int max=*a;
+	for(int i=0;i<n;i++)
+ 	if (*(a+i)>max) max=*(a+i);
+ 	return max;
+}
+
+// SV viet tiep ham sap xep nhu trong bai giang

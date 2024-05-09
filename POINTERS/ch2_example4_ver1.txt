@@ -1,0 +1,65 @@
+//phien ban dung mang tinh
+#include <iostream.h>
+#define maxn 10000
+struct ngaysinh
+{
+	int ngay;
+	int thang;
+	int nam;	
+};
+struct hoso
+{
+	char hoten[32];
+	ngaysinh ns;
+	long luong;
+	long thuong;
+	long thuclinh;
+};
+void nhap(hoso hs[], int &n);
+void xuat(hoso hs[], int n);
+void swap(hoso &hs1, int  &hs2);
+void sapxep(hoso hs[], int n);
+int main()
+{
+	hoso hs[maxn];
+	int n;
+	nhap(hs,n);
+	xuat(hs,n);
+	sapxep(hs,n);
+	xuat(hs,n);
+	return 0;
+}
+void nhap(hoso hs[], int &n)
+{
+	cout<<"Nhap so ho so : ";cin>>n;
+	for (int i=1;i<=n;i++)
+	{
+	cout<<"Nhap ho so thu "<<i<<":\n";
+	cout<<"Ho ten: ";fflush(stdin);gets(hs[i].hoten);
+	cout<<"Ngay sinh: ";cin>>hs[i].ns.ngay>>hs[i].ns.thang>>hs[i].ns.nam;
+	cout<<"Luong : ";cin>>hs[i].luong;
+	cout<<"Thuong: ";cin>>hs[i].thuong;
+	hs[i].thuclinh=hs[i].luong+hs[i].thuong;
+	}
+}
+void xuat(hoso hs[], int n)
+{
+	cout<<"Danh sach nhan vien:\n";
+	for (int i=1;i<=n;i++)
+	cout<<hs[i].hoten<<" "
+	<<hs[i].ns.ngay<<" "<<hs[i].ns.thang<<" "<<hs[i].ns.nam<<" "
+    <<hs[i].luong<<" "<<hs[i].thuong<<" "<<hs[i].thuclinh<<endl;
+}
+void swap(hoso &hs1, hoso  &hs2)
+{
+	hoso hstemp=hs1;
+	hs1=hs2;
+	hs2=hstemp;	
+}
+void sapxep(hoso hs[], int n)
+{
+	for (int i=1;i<n;i++)
+	for (int j=i+1;j<=n;j++)
+	if (hs[i].thuclinh<hs[j].thuclinh)
+		swap(hs[i],hs[j]);
+}	

@@ -1,0 +1,110 @@
+//CH4 - VD2.cpp
+#include<iostream.h>
+#include<math.h>
+#define maxn 10000
+void docfile(int a[], int &n);
+void ghifile(int a[], int n);
+int caua(int a[], int n);
+int caub(int a[], int n);
+int cauc(int a[], int n);
+int caud(int a[], int n);
+int caue(int a[], int n);
+int main()
+{
+	int a[maxn],n;
+	docfile(a,n);
+	ghifile(a,n);
+	return 0;
+}
+void docfile(int a[], int &n)
+{
+	FILE *f;
+	f=fopen("sequence.inp","rt");
+	fscanf(f,"%d",&n);
+	for (int i=0;i<n;i++)
+	fscanf(f,"%d",&a[i]);
+	fclose(f);
+}
+void ghifile(int a[], int n)
+{
+	FILE *f;
+	f=fopen("sequence.out","wt");
+	fprintf(f,"Ket qua cua VD2 chuong 3:\n");
+	fprintf(f,"Cau a: %d\n",caua(a,n));
+	fprintf(f,"Cau b: %d\n",caub(a,n));
+	fprintf(f,"Cau c: %d\n",cauc(a,n));
+	fprintf(f,"Cau d: %d\n",caud(a,n));
+	fprintf(f,"Cau e: %d\n",caue(a,n));
+	fclose(f);
+}
+int caua(int a[], int n)
+{
+	int s=0;
+	for (int i=0;i<n;i++)
+	s=s+a[i];
+	return s;	
+}
+int caub(int a[], int n)
+{
+	int max=a[0];
+	for (int i=1;i<n;i++)
+	if (a[i]>max) max=a[i];
+	return max;	
+}
+int prime(int n)
+{
+	if (n<2) return 0;
+	int k=sqrt(n);
+	for (int i=2;i<=k;i++)
+	if (n%i==0) return 0;
+	return 1;
+}
+int cauc(int a[], int n)
+{
+	int d=0;
+	for (int i=0;i<n;i++)
+	if (prime(a[i])) d++;
+	return d;	
+}
+int doixung(int n)
+{
+	int s=0,m=n;
+	while (n>0)
+	{
+		s=s*10+n%10; ///?????
+		n=n/10;
+	}	
+	return s==m;
+}
+int caud(int a[], int n)
+{
+	int d=0;
+	for (int i=0;i<n;i++)
+	if (prime(a[i])  && doixung(a[i])) d++;
+	return d;	
+}
+int tongchuso(int n)
+{
+	int s=0;
+	while (n>0)
+	{
+		s=s+n%10;
+		n=n/10;
+	}
+	return s;
+}
+int caue(int a[], int n)
+{
+	int s=0;
+	for (int i=0;i<n;i++)
+		s=s+tongchuso(a[i]);
+	return s;	
+}
+/*
+
+10
+3 7 27
+4 2 5 131
+100 101
+121
+*/

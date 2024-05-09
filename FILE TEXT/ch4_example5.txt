@@ -1,0 +1,14 @@
+#include <iostream.h>
+int main()
+{
+	FILE *f;
+	srand(time(NULL));
+	f=fopen("numb.txt","wb");
+	int n;
+	cin>>n;
+	putw(n,f);
+	for (int i=1;i<=n;i++)
+		putw(rand(),f);
+	fclose(f);
+	return 0;
+}

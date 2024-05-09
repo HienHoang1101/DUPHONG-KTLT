@@ -1,0 +1,19 @@
+#include <iostream.h>
+struct phanso
+{	
+	int tuso;
+	int mauso;
+};
+phanso ps;
+int main()
+{	
+	FILE *f;
+	f=fopen("phanso.txt","rb");
+	int n;
+	n=getw(f);
+	cout<<n<<endl;
+	while (fread(&ps,sizeof(ps),1,f))
+	cout<<ps.tuso<<"/"<<ps.mauso<<endl;
+	fclose(f);
+	return 0;
+}

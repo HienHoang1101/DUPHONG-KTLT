@@ -1,0 +1,16 @@
+#include<iostream.h>
+int main()
+{
+	FILE *f=fopen("str.txt","rt");
+	char s[256];int d;
+	while (!feof(f))
+	{
+	fgets(s,256,f);
+	d=strlen(s);
+	if (!feof(f)) d--;
+	cout<<d<<" ";
+	}
+	cout<<endl;
+	fclose(f);
+	return 0;
+}

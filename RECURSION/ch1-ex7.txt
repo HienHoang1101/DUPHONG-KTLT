@@ -1,0 +1,31 @@
+#include<iostream.h>
+void input(double &x, int &n);
+double xn(double x, int n);
+int main()
+{
+	double x;
+	int n;
+	input(x,n);
+	cout<<xn(x,n)<<endl;
+	return 0;
+}
+void input(double &x, int &n)
+{
+	cout<<"Enter x = ";cin>>x;
+	cout<<"Enter n = ";cin>>n;
+}
+double xn(double x, int n)
+{
+	if (n>0)
+	if (n%2==0)	
+		{
+		double  t=xn(x,n/2);
+		return t*t;
+		}
+	else		
+		{
+		double t=xn(x,(n-1)/2); 
+		return t*t*x;
+		}
+	return 1;
+}

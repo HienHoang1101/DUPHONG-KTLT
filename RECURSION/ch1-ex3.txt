@@ -1,0 +1,22 @@
+#include<iostream.h>
+int tinhxn(int n);
+int tinhyn(int n);
+int main()
+{
+	int n;
+	cout<<"Nhap vao n: ";cin>>n;
+	cout<<tinhxn(n)<<" "<<tinhyn(n)<<endl;
+	return 0;
+}
+int tinhxn(int n)
+{
+	if(n==0)
+	return 1;
+	return tinhxn(n-1)+tinhyn(n-1);
+}
+int tinhyn(int n)
+{
+	if(n==0)
+	return 0;
+	return 3*tinhxn(n-1)+2*tinhyn(n-1);
+}

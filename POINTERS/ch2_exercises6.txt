@@ -1,0 +1,99 @@
+#include<iostream.h>
+struct node
+{
+	int info;
+	node *next;
+};
+struct list
+{
+	node *head,*tail;
+};
+node* getnode(int x)
+{
+	node *p=new node;
+	if(p==NULL) exit(1);
+	p->info=x;
+	p->next=NULL;
+	return p;
+}
+void insert_tail(list &l, node *p)
+{
+	if(l.head==NULL)
+	{
+		l.head=p;
+		l.tail=p;
+	}
+	else
+	{
+		l.tail->next=p;
+		l.tail=p;
+	}
+}
+void list_insert_tail(list &l)
+{
+	l.head=l.tail=NULL;
+	int x,n;
+	cout<<"nhap n: ";cin>>n;
+	for(int i=1;i<=n;i++)
+	{
+		cin>>x;
+		insert_tail(l,getnode(x));
+	}
+}
+void list_process(list l)
+{
+	for(node *p=l.head; p!=NULL;p=p->next)
+	cout<<p->info<<" ";
+}
+void delete_node_head(list &l)
+{
+	node *p=l.head;
+	if(p!=NULL)
+	{
+		l.head=l.head->next;
+		delete(p);
+	}
+	else l.tail=NULL;
+}
+void delete_node_keyk(list &l, int k)
+{
+	node *p=l.head;
+	if(p->info==k) delete_node_head(l);
+	else
+	{
+		node *q=p->next;
+		while((q->info!=k)&&(q!=NULL))
+		{
+			p=q;
+			q=p->next;
+		}
+		p->next=q->next;
+	}
+}
+int min_value(list l)
+{
+	int min=INT_MAX;
+	for(node *p=l.head; p!=NULL;p=p->next)
+	if(p->info<min) min=p->info;
+	return min;
+}
+void sort(list &l, list l1)
+{
+	l1.head=l1.tail=NULL;
+	while(l.head!=NULL)
+	{
+		insert_tail(l1,getnode(min_value(l)));
+		delete_node_keyk(l,min_value(l));
+	}
+	l=l1;
+}
+int main()
+{
+	list l, l1;
+	list_insert_tail(l);
+	list_process(l);
+	cout<<"\n";
+	sort(l,l1);
+	list_process(l);
+	return 0;
+}

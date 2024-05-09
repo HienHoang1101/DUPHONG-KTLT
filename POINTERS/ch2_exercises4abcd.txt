@@ -1,0 +1,113 @@
+//n=8; 11 5 7 4 3 6 2 7
+#include<iostream.h>
+#include<math.h>
+struct 	node 
+	{	
+	int	info;
+	node *next;
+	};
+struct	list
+	{
+		node	*head,*tail;
+	} ;
+void list_insert_tail(list &l);
+void list_process(list l);
+int sum(list l);
+int count_prime(list l);
+list l;
+int main()
+{
+	list_insert_tail(l);	
+//	list_process(l);
+//	cout<<sum(l)<<endl;
+//	cout<<count_prime(l)<<endl;
+	return 0;
+}
+node*	getnode (int x)
+{	
+	node* p=new node;
+	if (p==NULL) 
+		exit(1);
+	p->info=x;
+	p->next=NULL;
+	return p;
+}
+
+void list_process(list l)
+{	
+	node*p=l.head;
+	while (p!=NULL)
+	{	
+		cout<<p->info<<"  ";
+		p=p->next;
+	}
+	cout<<endl;
+}
+void	insert_tail(list &l,node *p)
+{
+	if (l.head==NULL)
+		  {	l.head=p;
+			l.tail=p;
+		  }
+	else
+		  {
+			l.tail->next=p;
+			l.tail=p;
+		  }
+}
+void list_insert_tail(list &l)
+{
+	int x,n;
+	cout<<"Nhap vao so n = ";cin>>n;
+	for (int i=1;i<=n;i++)
+	{
+		cin>>x;
+		insert_tail(l,getnode(x));
+	}
+}
+//BT2-4a
+//sum the elements in the list
+int sum(list l)
+{
+	int s=0;
+	for (node *p=l.head;p!=NULL;p=p->next)
+	s=s+p->info;
+	return s;
+}
+//BT2-4b
+int prime(int n)
+{
+	if (n<2) return 0;
+	int k=sqrt(n);
+	for (int i=2;i<=k;i++)
+		if (n%i==0) return 0;
+	return 1;
+}
+//count the number of primes in the list
+int count_prime(list l)
+{
+	int d=0;
+	for (node *p =l.head;p!=NULL;p=p->next)
+	if (prime(p->info)) d++;
+	return d;
+}
+//BT2-4c
+void count_even_odd(list l)
+{
+	int d1=0,d2=0;
+	for (node *p=l.head;p!=NULL;p=p->next)
+	if (p->info%2==0)d2++;
+	else d1++;
+	cout<<"\nSo luong so le: "<<d1;
+	cout<<"\nSo luong so chan: "<<d2;
+}
+//BT2-4d
+//find the largest element in a list
+int max_value(list l)
+{	
+	int max=l.head->info;
+	for (node *p = l.head;p!=NULL;	p=p->next)
+	if (p->info>max)
+		max=p->info;
+	return max;
+}

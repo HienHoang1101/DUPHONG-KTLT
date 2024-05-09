@@ -1,0 +1,29 @@
+//Binary browser
+#include<iostream.h>
+int x[1000];
+int n,d=0;
+
+void output()
+{
+	cout<<++d<<":";
+	for (int i=1;i<=n;i++)
+		cout<<x[i]<<" ";
+	cout<<endl;
+}
+void Binarybrowser(int i)
+{
+	for (int j=0;j<=1;j++)	
+	{
+		x[i]=j;
+		if (i==n)    	
+			output();
+		else           
+			Binarybrowser(i+1);
+	}
+}
+
+int main()
+{
+	cout<<"enter n = :";	cin>>n;
+	Binarybrowser(1);
+}

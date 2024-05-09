@@ -1,0 +1,95 @@
+#include<iostream.h>
+
+struct nhanvien
+{
+	char manv[6];
+	char hoten[32];
+	int luong;
+	int thuong;
+	int thuclinh;
+};
+
+
+void writefile(char *filename);
+void readfile(char *filename);
+void search(char *filename);
+int main()
+{
+	int ch;
+//	while (1) {
+		cout<<"1.Nhap ho so\n";
+		cout<<"2.In ho so\n";
+		cout<<"3.Tim kiem\n";
+		cout<<"4.Thoat\n";
+		cout<<"Ban chon 1,2,3,4: ";cin>>ch;
+		switch (ch)
+		{
+			case 1:	writefile("hoso.dat"); 	break;
+			case 2: readfile("hoso.dat");	break;
+			case 3: search("hoso.dat");		break;
+			case 4: exit(1);
+		}
+	//}
+	return 0;
+}
+void writefile(char *filename)
+{
+	FILE *f;
+	int n;
+	nhanvien nv;
+	f=fopen(filename,"wb");//wb/ab
+	cout<<"Nhap bao nhieu nhan vien : ";cin>>n;
+	
+	for (int i=1;i<=n;i++)
+	{
+		cout<<"Ho so thu "<<i<<":";
+		cout<<"MANV  : ";fflush(stdin);gets(nv.manv);
+		cout<<"HOTEN : ";fflush(stdin);gets(nv.hoten);
+		cout<<"LUONG : ";cin>>nv.luong;
+		cout<<"THUONG: ";cin>>nv.thuong;
+		nv.thuclinh=nv.luong+nv.thuong;
+		fwrite(&nv,sizeof(nv),1,f);
+	}
+	fclose(f);
+}
+void readfile(char *filename)// tong thuc linh
+{
+	FILE *f;
+	nhanvien nv;
+	f=fopen(filename,"rb");
+	cout<<"MANV | Ho va ten | LUONG  | THUONG  |THUCLINH\n";
+	fread(&nv,sizeof(nv),1,f);
+	fflush(stdin);
+	int tong=0;
+	while (!feof(f))
+	{
+	printf("%s %s %d %d %d\n",nv.manv, nv.hoten,nv.luong,nv.thuong,nv.thuclinh);
+	tong=tong+nv.thuclinh;
+	fread(&nv,sizeof(nv),1,f);
+	fflush(stdin);
+	}
+	cout<<tong<<endl;
+	fclose(f);
+}
+void search(char *filename)
+{
+	FILE *f;
+	nhanvien nv;
+	f=fopen(filename,"rb");
+	char kq[5];
+	fread(&nv,sizeof(nv),1,f);
+	int max= nv.luong;
+		strcpy(kq,nv.manv);
+	while (!feof(f))
+	{
+		if (nv.luong>max) 
+			{
+			max=nv.luong;
+			strcpy(kq,nv.manv);
+			}
+		fread(&nv,sizeof(nv),1,f);
+	}
+	cout<<"Ket qua: "<<kq<<endl;
+	fclose(f);
+}
+//.....

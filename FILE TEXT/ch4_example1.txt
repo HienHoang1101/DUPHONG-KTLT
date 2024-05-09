@@ -1,0 +1,20 @@
+//CH4 - VD1.cpp
+#include<iostream.h>
+int main()
+{
+	FILE *f;
+	int a,b,c;
+	f=fopen("num.inp","rt");
+	fscanf(f,"%d%d%d",&a,&b,&c);
+	int s=a+b+c;
+	float tbc=s/3.0;
+	fclose(f);
+	FILE *g;
+	g=fopen("num.out","wt");
+	fprintf(g,"%d\n",s);
+	fprintf(g,"%0.2f",tbc);
+	fclose(g);
+	return 0;
+}
+//3 4 6
+// 13 4.33

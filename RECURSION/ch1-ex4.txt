@@ -1,0 +1,26 @@
+#include<iostream.h>
+int An(int n);
+int main()
+{
+	int n;
+	cout<<"Nhap n= ";cin>>n;
+	cout<<"Ket qua: "<<An(n);
+	cout<<endl;
+	return 0;
+}
+int An(int n)
+{
+	if(n==1)return 1;
+	int s=0;
+	for(int i=1;i<n;i++)
+	s=s+An(i);
+	return s*n;
+}
+
+//Mot phien ban khac
+int dayan(int n, int &sum)
+{
+	if (n==1) return 1;
+	sum=sum+dayan(n-1,sum);
+	return n*sum;
+}

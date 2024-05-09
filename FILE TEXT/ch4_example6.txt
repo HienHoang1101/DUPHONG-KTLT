@@ -1,0 +1,16 @@
+#include <iostream.h>
+int main()
+{
+	FILE *f;
+	int n,x;
+	f=fopen("numb.txt","rb");
+	n=getw(f);
+	cout<<n<<endl;
+	for (int i=1;i<=n;i++) //	SV thực hành thêm câu lệnh while (!feof(f)) ???
+ 	{
+		x=getw(f);
+		cout<<x<<" ";
+	}
+	fclose(f);
+	return 0;
+}

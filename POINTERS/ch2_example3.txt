@@ -1,0 +1,41 @@
+#include<iostream.h>
+void nhap(int *&a, int &m, int &n);
+void xuat(int *a, int m, int n);
+int dem(int *a,int m, int n, int x);
+int main()
+{
+	int *a,m,n,x; 
+	nhap(a,m,n);
+	xuat(a,m,n);
+	cout<<"Result: "<<dem(a,m,n,x)<<endl;
+	delete a;
+	return 0;	
+}
+void nhap(int *&a, int &m, int &n)
+{
+	cout<<"Enter m : ";cin>>m;
+	cout<<"Enter n : ";cin>>n;
+	a=new int [m*n];
+	for(int i=0;i<m;i++)
+	for(int j=0;j<n;j++)
+	cin>>*(a+i*n+j);
+}
+void xuat(int *a, int m, int n)
+{
+	for(int i=0;i<m;i++)
+	{
+	for(int j=0;j<n;j++)
+	cout<<*(a+i*n+j)<<" ";
+	cout<<endl;
+	}
+}	
+int dem(int *a,int m, int n, int x)
+{
+	int d=0;
+	cout<<"Enter x : ";cin>>x;
+	for(int i=0;i<m;i++)
+	for(int j=0;j<n;j++)
+ 	if (*(a+i*n+j)==x) d++;
+ 	return d;
+}
+// cau tim vi tri, SV tu hoan chinh tiep

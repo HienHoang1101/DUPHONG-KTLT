@@ -1,0 +1,147 @@
+#include<iostream.h>
+char*  strtrim(char *s);
+char *word_right(char *s);
+char *word_left(char *s);
+void word_maxlen(char *s);
+int main()
+{
+	char *s;
+	s=new char [10000];
+	gets(s);
+//	cout<<strtrim(s)<<endl;
+//	cout<<word_left(s)<<endl;
+	word_maxlen(s);
+	return 0;
+}
+//Ex3-2a
+char*  strtrim(char *s)					
+{	
+	int i=0;
+	while (s[i]!='\0')
+	{
+	if (s[i]==32 &&s[i+1]==32)
+		strcpy(s+i--,s+i+1);
+		i++;
+	}
+	if (s[0]==' ') strcpy(s,s+1);
+	if (s[strlen(s)-1]==' ') s[strlen(s)-1]='\0';
+	return s;
+}
+//Ex3-2b
+char *word_right(char *s)
+{
+	return strrchr(s,' ')+1;
+}
+//Ex3-2c
+char *word_left(char *s)
+{
+	int k=strchr(s,' ')-s;
+	s[k]='\0';
+	return s;
+}
+//Ex3-2d
+void word_maxlen(char *s)						
+{
+	char str_result[10000]; // char  *str_result = new char [100000] ??? 
+   	char *token;
+   	int max=0;
+  	token = strtok(s," ");
+ 	while(token !=NULL) 
+   	{
+   	if(strlen(token)>max)
+      	{
+			max=strlen(token);
+			strcpy(str_result,token);
+		}
+  		token=strtok(NULL," ");
+   	}
+   	cout<<str_result<<endl;
+}
+
+//Ex3-2e
+#include<iostream.h>
+char *delstr(char *s, int p, int l);
+int main()
+{
+	char s[10000];
+	strcpy(s,"ky thuat lap trinh");
+	int p=3,l=6;
+	cout<<delstr(s,p,l);
+	return 0;	
+}
+char *delstr(char *s, int p, int l)
+{
+	strcpy(s+p,s+p+l);
+	return s;
+}
+
+//Ex3-2f & g
+#include<iostream.h>
+int str_search(char *s, char *x);				
+int str_count(char *s,char *x);
+int main()
+{
+	char *s;
+	s=new char [10000];
+	gets(s);
+	char *x;
+	x=new char [10000];
+	gets(x);
+	cout<<str_count(s,x);
+	cout<<endl;
+	return 0;
+}
+int str_search(char *s, char *x)				
+{
+	if (strstr(s,x)==NULL) return -1;
+	return strstr(s,x)-s;	
+}
+int str_count(char *s,char *y)
+{  	
+	int d=0;
+	while (strstr(s,y)!=NULL)
+	{
+		d++;
+		strcpy(s,strstr(s,y)+1);
+	}
+	return d;
+}
+
+//Ex3-2h
+//chen s2 vao vi tri p cua s1
+#include<iostream.h>
+char *insert_character(char *s1, char *s2,int p);
+int main()
+{
+	char *s1,*s2;
+	s1=new char [256];
+	s2=new char [256];
+	strcpy(s1,"lap trinh nghe thuat");
+	strcpy(s2,"la ");
+	int p=10;
+	cout<<insert_character(s1,s2,p);
+	cout<<endl;
+	return 0;	
+}
+char *insert_character(char *s1, char *s2,int p)
+{
+	char *stemp=new char [256];
+	strcpy(stemp,s1+p);
+	strcpy(s1+p,s2);
+	strcat(s1,stemp);
+	return s1;
+}
+/*
+//other version
+char *insert_character(char *s1, char *s2,int p)
+{
+char *s1_first,*s1_last;
+s1_first=new char [256];
+s1_last=new char [256];
+strcpy(s1_first,s1);
+s1_first[p]='\0';
+s1_last=s1+p;
+strcat(s1_first,s2);
+return strcat(s1_first,s1_last);
+}
+*/
